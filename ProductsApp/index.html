@@ -15,6 +15,36 @@
         <input type="button" value="Search" onclick="find();" />
         <p id="product" />
     </div>
+    
+    
+    <div>
+        <h2>Get Name Product</h2>
+        <input type="text" id="nameProdById"  />
+        <input type="button" value="Get Name" onclick="GetNameProduct();" />
+        <p id="productName" />
+    </div>
+
+
+    <div>
+        <h2>Get Name Product String</h2>
+        <input type="text" id="idProdotto" />
+        <input type="button" value="Get Name" onclick="GetNameProductString();" />
+        <p id="nomeProdotto" />
+    </div>
+
+    <div>
+        <h2>Get Price Product</h2>
+        <input type="text" id="idProdottoForPrice" />
+        <input type="button" value="Get Name" onclick="GetNameProductPrice();" />
+        <p id="priceProdotto" />
+    </div>
+
+    <div>
+        <h2>dammi il prodotto</h2>
+        <input type="text" id="idP" />
+        <input type="button" value="Dammi il prodotto" onclick="GetDammiIlProdotto();" />
+        <p id="restituito" />
+    </div>
 
     <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
     <script>
@@ -22,7 +52,7 @@
 
         $(document).ready(function () {
             // Send an AJAX request
-            $.getJSON(uri)
+            $.getJSON(uri + '/' + 'GetProducts')
                 .done(function (data) {
                     // On success, 'data' contains a list of products.
                     $.each(data, function (key, item) {
@@ -38,7 +68,7 @@
 
         function find() {
             var id = $('#prodId').val();
-            $.getJSON(uri + '/' + id)
+            $.getJSON(uri + '/' + 'GetProduct' + '/' + id)
                 .done(function (data) {
                     $('#product').text(formatItem(data));
                 })
@@ -46,6 +76,53 @@
                     $('#product').text('Error: ' + err);
                 });
         }
+
+        function GetNameProduct() {
+            var id = $('#nameProdById').val();
+            $.getJSON(uri + '/' + 'GetProductName' + '/' + id)
+                .done(function (data) {
+                    $('#productName').text(data);
+                })
+                .fail(function (jqXHR, textStatus, err) {
+                    $('#productName').text('Error: ' + err);
+                });
+        }
+
+        function GetNameProductString() {
+            var id = $('#idProdotto').val();
+            $.getJSON(uri + '/' + 'GetProductNameString' + '/' + id)
+                .done(function (data) {
+                    $('#nomeProdotto').text(data);
+                })
+                .fail(function (jqXHR, textStatus, err) {
+                    $('#nomeProdotto').text('Error: ' + err);
+                });
+        }
+
+
+        function GetNameProductPrice() {
+            var id = $('#idProdottoForPrice').val();
+            $.getJSON(uri + '/' + 'GetProductPrice' + '/' + id)
+                .done(function (data) {
+                    $('#priceProdotto').text(data);
+                })
+                .fail(function (jqXHR, textStatus, err) {
+                    $('#priceProdotto').text('Error: ' + err);
+                });
+        }
+        
+        
+        function GetDammiIlProdotto() {
+            var id = $('#idP').val();
+            $.getJSON(uri + '/' + 'GetDammiIlProdotto' + '/' + id)
+                .done(function (data) {
+                    $('#restituito').text(formatItem(data));
+                })
+                .fail(function (jqXHR, textStatus, err) {
+                    $('#restituito').text('Error: ' + err);
+                });
+        }
+
     </script>
 </body>
 </html>

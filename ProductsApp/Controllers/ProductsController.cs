@@ -98,14 +98,26 @@ namespace ProductsApp.Controllers
 
         
         // se lascio due metodi GET allora NON funziona
+        //[HttpGet]
+        //public Product[] YYYYY()
+        //{
+        //    return products;
+        //}
+
+
+        //---------------------------------------------------------------------------
+
+
+        // OK
         [HttpGet]
-        public Product[] YYYYY()
+        public Product[] GetProducts()
         {
             return products;
         }
 
-
-        //var uri = 'api/products/id';
+        
+        // OK
+        //var uri = 'api/products/GetProduct/id';
         public IHttpActionResult GetProduct(int id)
         {
             var product = products.FirstOrDefault((p) => p.Id == id);
@@ -115,5 +127,51 @@ namespace ProductsApp.Controllers
             }
             return Ok(product);
         }
+
+
+        // OK
+        public IHttpActionResult GetProductName(int id)
+        {
+            var product = products.FirstOrDefault((p) => p.Id == id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+            return Ok(product.Name);
+        }
+
+
+
+        public string GetProductNameString(int id)
+        {
+            var product = products.FirstOrDefault((p) => p.Id == id);
+            if (product == null)
+            {
+                return "Non trovato";
+            }
+            return product.Name;
+        }
+
+        public decimal GetProductPrice(int id)
+        {
+            var product = products.FirstOrDefault((p) => p.Id == id);
+            if (product == null)
+            {
+                return 0;
+            }
+            return product.Price;
+        }
+
+
+        public Product GetDammiIlProdotto(int id)
+        {
+            var product = products.FirstOrDefault((p) => p.Id == id);
+            if (product == null)
+            {
+                return new Product { Name = "NON trovato" };
+            }
+            return product;
+        }
+
     }
 }

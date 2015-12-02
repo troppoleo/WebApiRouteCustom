@@ -13,13 +13,7 @@ namespace ProductsApp
 
             // Web API routes
             config.MapHttpAttributeRoutes();
-            
-            //var uri = 'api/products';
-            //config.Routes.MapHttpRoute(
-            //    name: "DefaultApi",
-            //    routeTemplate: "api/{controller}/{id}",
-            //    defaults: new { id = RouteParameter.Optional }
-            //);
+
 
             // così facendo devo esplicitare il nome dell'action api 
             config.Routes.MapHttpRoute(
@@ -27,6 +21,16 @@ namespace ProductsApp
                 routeTemplate: "api/{controller}/{action}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            //var uri = 'api/products';
+            // questo non è necessario dato che uso ruote esplicito
+            config.Routes.MapHttpRoute(
+                name: "DefaultApi",
+                routeTemplate: "api/{controller}/{id}",
+                defaults: new { id = RouteParameter.Optional }
+            );
+
+            
 
 
 
